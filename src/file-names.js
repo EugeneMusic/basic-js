@@ -17,13 +17,16 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function renameFiles(names) {
   let newName = []
-  names.reduce((sum, elem) => {
+  names.map((elem) => {
+    sum = 1;
     if (newName.includes(elem)) {
-      newName.push(elem + `${sum}`)
-
+      while (newName.includes(elem + `(${sum})`)) {
+        sum++;
+      }
+      newName.push(elem + `(${sum})`);
     }
     else newName.push(elem)
-  }, 1)
+  })
   return newName
 }
 
